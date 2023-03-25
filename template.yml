@@ -1,0 +1,43 @@
+# template.yaml
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: The Mason Network News App
+
+Resources:
+  NewsApiFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: NewsApiFunction
+      Handler: newsAPIFunction.handler
+      Runtime: nodejs12.x
+      Timeout: 10
+      Environment:
+        Variables:
+          NEWS_API_KEY: !Ref NewsApiKey
+          CHAT_GPT_API_KEY: !Ref ChatGptApiKey
+
+  TwitterFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: TwitterFunction
+      Handler: twitterFunction.handler
+      Runtime: nodejs12.x
+      Timeout: 10
+      Environment:
+        Variables:
+          CONSUMER_KEY: !Ref TwitterConsumerKey
+          CONSUMER_SECRET: !Ref TwitterConsumerSecret
+          ACCESS_TOKEN: !Ref TwitterAccessToken
+          ACCESS_TOKEN_SECRET: !Ref TwitterAccessTokenSecret
+          CHAT_GPT_API_KEY: !Ref ChatGptApiKey
+
+  ChatGPTFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: ChatGPTFunction
+      Handler: chatGPTFunction.handler
+      Runtime: nodejs12.x
+      Timeout: 10
+      Environment:
+        Variables:
+          CHAT_GPT_API_KEY: !Ref ChatGptApiKey

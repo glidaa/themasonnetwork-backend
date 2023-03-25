@@ -1,17 +1,19 @@
+# buildspec.yml
 version: 0.2
 
 phases:
   install:
     runtime-versions:
-      nodejs: 12
+      nodejs: 14
+    commands:
+      - npm ci
   build:
     commands:
-      - npm install
       - npm run build
-      - zip -r my-function.zip *
   post_build:
     commands:
-      - mv my-function.zip ../
+      - aws cloudformation package --template-file template.yaml --s3-bucket <YOUR_S3_BUCKET> --output-template-file packaged-template.yaml
+
 artifacts:
   files:
-    - ../my-function.zip
+    - packaged-template.yaml
