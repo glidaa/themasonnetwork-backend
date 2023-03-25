@@ -1,0 +1,11 @@
+{
+  "name": "themasonnetwork-backend",
+  "version": "1.0.0",
+  "description": "The greatest news app ever that will change the way we consume news",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Michael Castleman",
+  "license": "ISC"
+}
