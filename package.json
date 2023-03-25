@@ -18,5 +18,9 @@
     "graphql": "^16.6.0",
     "graphql-subscriptions": "^2.0.0",
     "serverless-http": "^3.2.0"
+  },
+  "devDependencies": {
+    "webpack": "^5.76.3",
+    "webpack-cli": "^5.0.1"
   }
 }
