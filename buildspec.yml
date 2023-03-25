@@ -12,7 +12,7 @@ phases:
       - npm run build
   post_build:
     commands:
-      - aws cloudformation package --template-file template.yaml --s3-bucket <YOUR_S3_BUCKET> --output-template-file packaged-template.yaml
+      - aws cloudformation package --template-file template.yaml --s3-bucket themasonnetwork-backend --output-template-file packaged-template.yaml
 
 artifacts:
   files:
