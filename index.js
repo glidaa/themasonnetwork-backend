@@ -1,10 +1,10 @@
+// index.js 
 const express = require('express');
 const serverless = require('serverless-http');
 const { ApolloServer } = require('apollo-server-express');
 const { gql } = require('apollo-server-express');
 const fsp = require('fs-extra').promises;
-const fs = require('fs');
-const fsPromises = fs.promises;
+
 
 // Define your GraphQL schema
 const typeDefs = gql`
