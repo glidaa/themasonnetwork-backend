@@ -1,24 +1,10 @@
+// newsAPIFunction.js
 require('dotenv').config();
 
-const AWS = require('aws-sdk');
 const axios = require('axios');
 const { print } = require('graphql/language/printer');
-const { createHttpLink } = require('apollo-link-http');
-const { ApolloClient } = require('apollo-client');
-const { InMemoryCache } = require('apollo-cache-inmemory');
 const gql = require('graphql-tag');
-const schema = require('./schema');
 const mutations = require('./mutations');
-
-const graphqlUrl = process.env.REACT_APP_GRAPHQL_ENDPOINT;
-
-const client = new ApolloClient({
-  link: createHttpLink({
-    uri: graphqlUrl,
-    fetch: fetch
-  }),
-  cache: new InMemoryCache()
-});
 
 exports.handler = async (event, context) => {
   try {
@@ -29,6 +15,8 @@ exports.handler = async (event, context) => {
         apiKey: process.env.NEWS_API_KEY
       }
     });
+    
+    console.log(response.data);
     
     // Format news data to match GraphQL schema
     const news = response.data.articles.map((article) => {
@@ -41,12 +29,15 @@ exports.handler = async (event, context) => {
       }
     });
     
+    console.log(news);
+    
     // Publish news data to GraphQL database
     const mutation = gql(print(mutations.createNews));
     const variables = { input: { news: news } };
     
-    await client.mutate({
-      mutation: mutation,
+    // Send a POST request to the GraphQL endpoint to add the news to the database
+    const { data } = await axios.post(process.env.REACT_APP_GRAPHQL_ENDPOINT, {
+      query: mutation,
       variables: variables
     });
       
@@ -62,3 +53,4 @@ exports.handler = async (event, context) => {
     };
   }
 };
+

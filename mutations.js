@@ -1,4 +1,7 @@
-type Mutation {
+const { gql } = require('apollo-server-express');
+
+const typeDefs = gql`
+  type Mutation {
     createNews(input: NewsInput!): News!
     updateNews(id: ID!, input: NewsInput!): News!
     deleteNews(id: ID!): Boolean!
@@ -20,4 +23,6 @@ type Mutation {
     url: String!
     imageUrl: String!
   }
-  
+`;
+
+module.exports = typeDefs;
