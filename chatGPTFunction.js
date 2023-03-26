@@ -1,6 +1,8 @@
 // chatGPTFunction.js
 const axios = require('axios');
-require('dotenv').config();
+const dotenv = require('dotenv');
+dotenv.config();
+
 const CHAT_GPT_API_KEY = process.env.CHAT_GPT_API_KEY;
 
 async function generateJoke(text) {

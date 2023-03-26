@@ -13,6 +13,10 @@ const typeDefs = gql`
     description: String!
     url: String!
     imageUrl: String!
+    joke: String
+    content: String
+    source: String
+    publishedAt: String
   }
   
   type News {
@@ -22,6 +26,10 @@ const typeDefs = gql`
     description: String!
     url: String!
     imageUrl: String!
+    joke: String
+    content: String
+    source: String
+    publishedAt: String
   }
 `;
 

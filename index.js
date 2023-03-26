@@ -1,39 +1,16 @@
-// index.js 
-const express = require('express');
-const serverless = require('serverless-http');
-const { ApolloServer } = require('apollo-server-express');
-const { gql } = require('apollo-server-express');
-const fsp = require('fs-extra').promises;
+// index.js
+const { handler: updateNews } = require('./newsAPIFunction');
 
 
-// Define your GraphQL schema
-const typeDefs = gql`
-  type Query {
-    news: [NewsItem]
-  }
+// Mock event and context objects
+const event = {};
+const context = {};
 
-  type NewsItem {
-    id: ID!
-    title: String!
-    content: String!
-    url: String!
-    author: String
-    publishedAt: String!
-  }
-`;
-
-// Define your GraphQL resolvers
-const resolvers = {
-  Query: {
-    news: async () => {
-      // Fetch news data from an API, database, or other sources
-      // Return an array of news items
-    },
-  },
-};
-
-const app = express();
-const server = new ApolloServer({ typeDefs, resolvers });
-server.applyMiddleware({ app });
-
-module.exports.handler = serverless(app);
+// Call the updateNews function with the mock event and context objects
+updateNews(event, context)
+  .then((result) => {
+    console.log(result);
+  })
+  .catch((error) => {
+    console.error(error);
+  });

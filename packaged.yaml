@@ -1,13 +1,11 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: The Mason Network News App
-
 Globals:
   Function:
     Environment:
       Variables:
         NEWS_API_KEY: da2-bmz5ed3ierbbbi4wsfujvv5rei
-
 Resources:
   NewsApiFunction:
     Type: AWS::Serverless::Function
@@ -21,7 +19,9 @@ Resources:
           Type: Schedule
           Properties:
             Schedule: rate(30 minutes)
-
+      CodeUri: s3://themasonnetwork-backend/da8b4057c1821d572d60c32d93fd0b52
+    Metadata:
+      SamResourceId: NewsApiFunction
   TwitterFunction:
     Type: AWS::Serverless::Function
     Properties:
@@ -34,7 +34,9 @@ Resources:
           Type: Schedule
           Properties:
             Schedule: rate(30 minutes)
-
+      CodeUri: s3://themasonnetwork-backend/da8b4057c1821d572d60c32d93fd0b52
+    Metadata:
+      SamResourceId: TwitterFunction
   ChatGPTFunction:
     Type: AWS::Serverless::Function
     Properties:
@@ -42,3 +44,6 @@ Resources:
       Handler: chatGPTFunction.handler
       Runtime: nodejs12.x
       Timeout: 10
+      CodeUri: s3://themasonnetwork-backend/da8b4057c1821d572d60c32d93fd0b52
+    Metadata:
+      SamResourceId: ChatGPTFunction
